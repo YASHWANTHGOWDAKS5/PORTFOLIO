@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Certificates</title>
+  <link rel="stylesheet" href="certificates.css">
+</head>
+<body>
+  <header class="header">
+    <h1>My Certificates</h1>
+    <p>A journey of achievements under the stars 🌌</p>
+  </header>
+
+  <main class="certificate-gallery">
+    <div class="certificate-card">
+      <img src="tic.jpg" alt="Certificate 1" class="certificate-image">
+      <h2>MITM ECE Hackathon2024</h2>
+      <p>Hackathon (HAXLR8) hosted by the EC department MIT Mysore. 
+The Hackathon had three groups or domine (with 60 teams)
+1.Alpha
+2.Beta
+3.Gamma
+And we were in gamma domine with topic "Health care technology"(patient appointment booking and educating application development) and the first round was of submitting the problem statement , methodology and objectives of our application in written form and we acquired 7th (by 55 points) position in points table
+In 2nd round the description of our application was presented by my team through a ppt and we acquired 5th position by (105 points)
+In 3rd round we built a prototype of of our application and there was an API implementation error which prevented our entry to top 3 teams to participate in the final round and our HAXLR8 hackathon journey ended by acquiring 6th place among 21 teams by (505 points).</p>
+    </div>
+    <div class="certificate-card">
+      <img src="77.jpg" alt="Certificate 2" class="certificate-image">
+      <h2>Certificate of Expertise</h2>
+      <p>Awarded to Yashwanth Gowda KS in recognition of outstanding proficiency in utilizing ChatGPT. With exceptional skills in crafting precise prompts and exploring advanced AI capabilities, Yashwanth has consistently demonstrated expertise in leveraging ChatGPT for innovation, creativity, and problem-solving. This certificate celebrates a journey of mastering conversational AI to its fullest potential..</p>
+    </div>
+    <!-- Add more certificate cards here -->
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Yashwanth Gowda KS | Showcasing Achievements</p>
+  </footer>
+
+  <script>
+    // JavaScript to dynamically add certificate cards
+    function addCertificate(imageSrc, title, description) {
+      const gallery = document.querySelector('.certificate-gallery');
+      const card = document.createElement('div');
+      card.classList.add('certificate-card');
+      card.innerHTML = `
+        <img src="tic.jpg" alt="mitm hacakathon" class="certificate-image">
+        <h2>${title}</h2>
+        <p>${description}</p>
+      `;
+      gallery.appendChild(card);
+    }
+
+    // Example usage
+    // addCertificate('certificate3.jpg', 'New Certificate', 'Description of the new certificate.');
+  </script>
+</body>
+</html>

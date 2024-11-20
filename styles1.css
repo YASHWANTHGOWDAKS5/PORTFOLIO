@@ -1,0 +1,99 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  background: radial-gradient(circle, #0b0033, #000011) fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Opening Animation */
+.opening-animation {
+  text-align: center;
+  padding: 20vh 10px;
+  animation: fadeIn 3s ease-in-out;
+}
+
+.opening-animation h1 {
+  font-size: 3rem;
+  color: #ffffff;
+}
+
+.opening-animation p {
+  font-size: 1.5rem;
+  color: #aaaaee;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #ddddff;
+}
+
+/* Topics Section */
+.topics {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+article {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+article h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+article p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Blinking Effect */
+.blinking {
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { color: #ffcc00; }
+  50% { color: #ffffff; }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  margin-top: 50px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

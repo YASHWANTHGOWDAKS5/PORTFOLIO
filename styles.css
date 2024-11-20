@@ -1,0 +1,223 @@
+/* Reset Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Background Section */
+.background-section {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* Restore height of background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Add space from top */
+margin-bottom: -110px; 
+    overflow: hidden;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Logo Container */
+.logo-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.logo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Description Section (Below the Image) */
+.description-section {
+    text-align: center;
+    padding: 50px 20px;
+    z-index: 2;
+    width: 80%;
+    max-width: 900px;
+margin-top: 70px; /* Add space from top */
+margin-bottom: -100px;
+}
+
+.intro-text, .second-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Button Container */
+.button-container {
+    margin-top: 50px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Button Styling */
+.button {
+    background-color: #3498db;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+/* Studies Section (Initially Hidden) */
+.studies-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+    margin-top: 50px;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.studies-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .logo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .description-section {
+        padding: 30px 10px;
+    }
+
+    .button-container .button {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+
+    .background-section {
+        height: 60vh;
+    }
+
+    .intro-text, .second-text {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+}
+.button1 {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+.logo1 {
+  width: 150px; /* Adjust the width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensures proper layout behavior */
+  margin: 0 auto; /* Centers the image horizontally */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+ /* Social Icons Container */
+    .social-icons {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #ccc;
+    }
+
+    /* Email Tooltip */
+    .email-tooltip {
+      display: none;
+      background-color: #222;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+    }
+
+    .email-tooltip::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: 10px;
+      border: 4px solid transparent;
+      border-bottom-color: #222;
+    }
+
+    /* Display Email Tooltip on Click */
+    .email:hover + .email-tooltip {
+      display: block;
+    }
