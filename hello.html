@@ -146,6 +146,42 @@
                 font-size: 1rem;
             }
         }
+            /* Styling for the container */
+.typing-container {
+  width: fit-content;
+  border-right: 2px solid black; /* Cursor effect */
+  white-space: nowrap; /* Prevents wrapping */
+  overflow: hidden; /* Hides overflowing text for the effect */
+  font-family: monospace; /* Typewriter-like font */
+  font-size: 1.5rem;
+}
+
+/* Typing animation */
+.typing-text {
+  display: inline-block;
+  animation: typing 4s steps(22, end), blink 0.5s step-end infinite alternate;
+}
+
+/* Keyframes for typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 22ch; /* Adjust this based on the number of characters */
+  }
+}
+
+/* Keyframes for blinking cursor */
+@keyframes blink {
+  from {
+    border-right-color: black;
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -154,7 +190,7 @@
         <canvas id="interactiveCanvas"></canvas>
         <div class="logo-container">
             <img src="yashu25.jpg" alt="Logo" class="logo">
-            <h1>Welcome to Yashwanth Gowda KS's Portfolio</h1>
+            <span class="typing-text"><h1>Welcome to Yashwanth Gowda KS's Portfolio</h1></span>
         </div>
     </div>
 
