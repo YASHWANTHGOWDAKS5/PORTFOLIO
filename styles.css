@@ -236,12 +236,12 @@ body {
 
 /* Typing Container with H1 Size */
 .typing-container {
-    font-size: 4.5em; /* Matches default <h1> size */
+    font-size: 14.5em; /* Matches default <h1> size */
     font-weight: bold; /* Matches typical <h1> styling */
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hide the text that is not "typed" yet */
     border-right: 2px solid #00f5ff; /* Cursor effect */
-    animation: typing 6s steps(42, end) 1s forwards, blink-caret 0.5s step-end 6s;
+    animation: typing 6s steps(52, end) 1s forwards, blink-caret 0.5s step-end 6s;
 }
 
 /* Typing Effect */
@@ -250,7 +250,7 @@ body {
         width: 0;
     }
     to {
-        width: 100%; /* Reveal the entire text */
+        width: 200%; /* Reveal the entire text */
     }
 }
 
