@@ -229,7 +229,7 @@ margin-bottom: -100px;
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hide the text that is not "typed" yet */
     border-right: 2px solid #00f5ff; /* Cursor effect */
-    animation: typing 15s steps(22, end) 1s forwards, blink-caret 1.5s step-end 15sec;
+    animation: typing 5s steps(42, end) 1s forwards, blink-caret 0.5s step-end 5s;
 }
 
 /* Typing Effect */
@@ -238,7 +238,7 @@ margin-bottom: -100px;
         width: 0;
     }
     to {
-        width: 100%; /* Adjust to fit your text length */
+        width: 100%; /* Reveal the entire text */
     }
 }
 
