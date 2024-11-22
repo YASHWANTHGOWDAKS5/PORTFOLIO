@@ -236,7 +236,7 @@ body {
 
 /* Typing Container with H1 Size */
 .typing-container {
-    font-size: 14.5em; /* Matches default <h1> size */
+    font-size: 3.5em; /* Matches default <h1> size */
     font-weight: bold; /* Matches typical <h1> styling */
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hide the text that is not "typed" yet */
