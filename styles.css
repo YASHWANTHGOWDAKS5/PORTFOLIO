@@ -229,7 +229,7 @@ margin-bottom: -100px;
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hide the text that is not "typed" yet */
     border-right: 2px solid #00f5ff; /* Cursor effect */
-    animation: typing 10s steps(22) 1s forwards, blink-caret 1.5s step-end 10sec;
+    animation: typing 10s steps(220) 1s forwards, blink-caret 1.5s step-end 10sec;
 }
 
 /* Typing Effect */
