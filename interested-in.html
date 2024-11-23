@@ -8,153 +8,186 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent scrolling */
             height: 100%;
+            overflow: hidden;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
-            color: #fff;
-            background: #000; /* Fallback for older browsers */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .background-section {
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
         canvas {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         .logo-container {
-            position: relative;
+            z-index: 2;
             text-align: center;
-            margin-top: 20vh;
+            animation: fadeIn 2s ease-in-out;
         }
 
         .logo {
-            max-width: 150px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             margin-bottom: 20px;
+            border: 2px solid white;
+            animation: rotateIn 2s ease-in-out;
+        }
+
+        h1, p {
+            margin: 0;
         }
 
         .button1, .button2 {
-            color: #fff;
+            color: white;
             text-decoration: none;
-            border: 2px solid #fff;
+            background: linear-gradient(90deg, #4caf50, #2196f3);
             padding: 10px 20px;
             border-radius: 5px;
-            transition: background 0.3s, color 0.3s;
+            display: inline-block;
+            margin: 10px;
+            animation: fadeIn 3s ease-in-out;
         }
 
-        .button1:hover, .button2:hover {
-            background: #fff;
-            color: #000;
+        ul {
+            list-style: none;
+            padding: 0;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                transform: rotate(-360deg);
+                opacity: 0;
+            }
+            to {
+                transform: rotate(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <canvas id="interactive-background"></canvas>
-    <div class="logo-container">
-        <img src="h1.jpg" alt="Logo" class="logo">
-        <h1>I Am Interested In</h1>
-        <p>Here are some areas I am passionate about:</p>
-        <ul>
-            <li><h3>Building applications using Dart, and I am proud to say that I am very good at coding.</h3></li>
-            <li><h3>Web development and building interactive websites (Dynamic/static).</h3></li>
-            <li><h3>I am very much interested in Astronomy: <a href="astro.html" class="button2"><u>Click to Know More</u></a></h3></li>
-        </ul>
-        <a href="hello.html" class="button1">Back to Home</a>
+    <div class="background-section">
+        <canvas id="background"></canvas>
+        <div class="logo-container">
+            <img src="your-circular-logo.png" alt="Logo" class="logo">
+            <h1>I Am Interested In</h1>
+            <p>Here are some areas I am passionate about:</p>
+            <ul>
+                <li><h3>Building applications using Dart; I am proud to say I am very good at coding.</h3></li>
+                <li><h3>Web development and building interactive websites (Dynamic/Static).</h3></li>
+                <li>
+                    <h3>I am very much Interested in Astronomy: 
+                        <a href="astro.html" class="button2"><u>Click to Know More</u></a>
+                    </h3><br>
+                </li>
+            </ul>
+            <a href="hello.html" class="button1">Back to Home</a>
+        </div>
     </div>
     <script>
-        const canvas = document.getElementById('interactive-background');
+        const canvas = document.getElementById('background');
         const ctx = canvas.getContext('2d');
-
-        let dots = [];
-        const numDots = 100;
-        const dotRadius = 3;
-        const mouse = { x: null, y: null };
-
-        // Resize canvas to fit the screen
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initDots();
-        });
+        const dots = [];
+        const maxDots = 100;
 
-        canvas.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        canvas.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        // Dot constructor
-        function Dot(x, y, dx, dy) {
-            this.x = x;
-            this.y = y;
-            this.dx = dx;
-            this.dy = dy;
-
-            this.draw = () => {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, dotRadius, 0, Math.PI * 2, false);
-                ctx.fillStyle = '#fff';
-                ctx.fill();
-            };
-
-            this.update = () => {
-                if (this.x + dotRadius > canvas.width || this.x - dotRadius < 0) {
-                    this.dx = -this.dx;
-                }
-                if (this.y + dotRadius > canvas.height || this.y - dotRadius < 0) {
-                    this.dy = -this.dy;
-                }
-
-                this.x += this.dx;
-                this.y += this.dy;
-
-                this.draw();
-
-                if (mouse.x && mouse.y) {
-                    const dist = Math.hypot(mouse.x - this.x, mouse.y - this.y);
-                    if (dist < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(this.x, this.y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = '#fff';
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
+        function createDot() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 1,
+                dx: Math.random() * 1 - 0.5,
+                dy: Math.random() * 1 - 0.5
             };
         }
 
-        // Initialize dots
-        function initDots() {
-            dots = [];
-            for (let i = 0; i < numDots; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const dx = (Math.random() - 0.5) * 2;
-                const dy = (Math.random() - 0.5) * 2;
-                dots.push(new Dot(x, y, dx, dy));
+        function drawDot(dot) {
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+
+        function updateDot(dot) {
+            dot.x += dot.dx;
+            dot.y += dot.dy;
+
+            if (dot.x < 0 || dot.x > canvas.width) dot.dx *= -1;
+            if (dot.y < 0 || dot.y > canvas.height) dot.dy *= -1;
+        }
+
+        function connectDots(dot, mouseX, mouseY) {
+            const distance = Math.hypot(dot.x - mouseX, dot.y - mouseY);
+            if (distance < 100) {
+                ctx.beginPath();
+                ctx.moveTo(dot.x, dot.y);
+                ctx.lineTo(mouseX, mouseY);
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
             }
         }
 
-        // Animate the canvas
-        function animate() {
-            requestAnimationFrame(animate);
+        function animate(mouseX, mouseY) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            dots.forEach((dot) => dot.update());
+            dots.forEach(dot => {
+                drawDot(dot);
+                updateDot(dot);
+                if (mouseX !== null && mouseY !== null) {
+                    connectDots(dot, mouseX, mouseY);
+                }
+            });
+
+            requestAnimationFrame(() => animate(mouseX, mouseY));
         }
 
-        // Start animation
-        initDots();
+        let mouseX = null;
+        let mouseY = null;
+
+        canvas.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouseX = null;
+            mouseY = null;
+        });
+
+        for (let i = 0; i < maxDots; i++) {
+            dots.push(createDot());
+        }
+
         animate();
     </script>
 </body>
