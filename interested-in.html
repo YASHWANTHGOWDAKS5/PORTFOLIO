@@ -135,15 +135,15 @@
         let height = canvas.height = window.innerHeight;
 
         const dots = [];
-        const maxDots = 100;
+        const maxDots = 20;
 
         function createDot() {
             return {
                 x: Math.random() * width,
                 y: Math.random() * height,
                 r: Math.random() * 2 + 1,
-                dx: Math.random() * 1 - 0.5,
-                dy: Math.random() * 1 - 0.5
+                dx: Math.random() * 0.2 - 0.1,
+                dy: Math.random() * 0.2 - 0.1
             };
         }
 
