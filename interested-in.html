@@ -36,6 +36,7 @@
             position: relative;
             z-index: 2;
             padding: 50px 20px;
+            overflow: auto;
         }
 
         .logo-container {
@@ -130,16 +131,16 @@
     <script>
         const canvas = document.getElementById('background');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
         const dots = [];
         const maxDots = 100;
 
         function createDot() {
             return {
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
+                x: Math.random() * width,
+                y: Math.random() * height,
                 r: Math.random() * 2 + 1,
                 dx: Math.random() * 1 - 0.5,
                 dy: Math.random() * 1 - 0.5
@@ -157,8 +158,8 @@
             dot.x += dot.dx;
             dot.y += dot.dy;
 
-            if (dot.x < 0 || dot.x > canvas.width) dot.dx *= -1;
-            if (dot.y < 0 || dot.y > canvas.height) dot.dy *= -1;
+            if (dot.x < 0 || dot.x > width) dot.dx *= -1;
+            if (dot.y < 0 || dot.y > height) dot.dy *= -1;
         }
 
         function connectDots(dot, mouseX, mouseY) {
@@ -174,7 +175,7 @@
         }
 
         function animate(mouseX, mouseY) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, width, height);
 
             dots.forEach(dot => {
                 drawDot(dot);
@@ -198,6 +199,11 @@
         canvas.addEventListener('mouseleave', () => {
             mouseX = null;
             mouseY = null;
+        });
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         });
 
         // Initialize dots
