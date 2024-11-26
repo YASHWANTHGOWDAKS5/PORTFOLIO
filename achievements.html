@@ -5,21 +5,244 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements</title>
     <link rel="stylesheet" href="achievements.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: linear-gradient(to top right, #ff7f50, #ff6347, #ff4500); /* New color theme */
+            overflow-x: hidden;
+        }
+
+        /* Background Section */
+        .background-section {
+            position: relative;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Achievements Container */
+        .achievements-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .achievements-list {
+            list-style-type: none;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .achievements-list li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .achievements-list li:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .button:hover {
+            background: black;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #121212;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Image Style */
+        .logo1 {
+            margin-top: 20px;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 150px;
+            height: 150px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="achievements-container">
-        <h1>My Achievements</h1>
-        <ul class="achievements-list">
-            <li>Completed a fully functional web project using React and Node.js.</li>
-            <li>Contributed to several open-source projects on GitHub.</li>
-            <li>Acquired 6th rank in MITM ECE-Hackathon by making an patient health and appointment app.</li>
-            <li>And I am verry good at chess and verry close to get the title of "Master" in chess.com(user-name:yashugowda25).</li><br><img src="qr.jpg" alt="QR Code" class="logo1">
-
-            <li>Created a mobile app using Flutter that helps users track their daily tasks.</li>
-            <li>Completed courses in JavaScript, C-Programing ,JAVA , Currently learning Python and Dart laguage.</li>
-        </ul>
-        <a href="certificates.html" class="button">View Certificates</a> \\//
-<a href="hello.html" class="button">Back to Home</a>
+    <!-- Background Section with Interactive Canvas -->
+    <div class="background-section">
+        <canvas id="interactiveCanvas"></canvas>
+        <div class="achievements-container" data-aos="fade-up">
+            <h1 data-aos="fade-down">My Achievements</h1>
+            <ul class="achievements-list" data-aos="zoom-in">
+                <li>Completed a fully functional web project using React and Node.js.</li>
+                <li>Contributed to several open-source projects on GitHub.</li>
+                <li>Acquired 6th rank in MITM ECE-Hackathon by making a patient health and appointment app.</li>
+                <li>Very good at chess and close to getting the title of "Master" on chess.com (username: yashugowda25).</li><br>
+                <img src="qr.jpg" alt="QR Code" class="logo1" data-aos="fade-up">
+                <li>Created a mobile app using Flutter that helps users track their daily tasks.</li>
+                <li>Completed courses in JavaScript, C Programming, Java, and currently learning Python and Dart.</li>
+            </ul>
+            <div data-aos="flip-up">
+                <a href="certificates.html" class="button">View Certificates</a>
+                <a href="hello.html" class="button">Back to Home</a>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 Yashwanth Gowda KS. All rights reserved.
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200, // Animation duration
+            easing: 'ease-in-out', // Easing function
+            once: true // Animation happens once
+        });
+
+        // JavaScript for Interactive Canvas
+        const canvas = document.getElementById('interactiveCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 3;
+                this.xSpeed = Math.random() * 2 - 1;
+                this.ySpeed = Math.random() * 2 - 1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            update() {
+                this.x += this.xSpeed;
+                this.y += this.ySpeed;
+
+                if (this.x < 0 || this.x > canvas.width) this.xSpeed *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.ySpeed *= -1;
+            }
+        }
+
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle) => {
+                particle.update();
+                particle.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
