@@ -5,123 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements</title>
     <link rel="stylesheet" href="achievements.css">
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        /* Basic Reset */
-        * {
+        /* Interactive Background */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            height: 100vh;
+            color: white;
         }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            color: #fff;
-            background: linear-gradient(to top right, #4b6cb7, #182848); /* New color theme */
-            overflow-x: hidden;
-        }
-
-        /* Background Section */
-        .background-section {
+        .achievements-container {
             position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             text-align: center;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+            max-height: 450px;
+            overflow-y: auto;
         }
 
+        .achievements-container h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        .achievements-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            animation: slideInFromLeft 1s ease-out;
+        }
+
+        .achievements-list li {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        /* Button Styling */
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            color: white;
+            background: #ff6600;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            margin-top: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .button:hover {
+            background: #ff8c00;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Interactive Canvas (Optional) */
         canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        /* Achievements Container */
-        .achievements-container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 30px;
-            width: 70%;
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        .achievements-list {
-            list-style-type: none;
-            font-size: 1.2rem;
-            color: #fff;
-            margin-top: 20px;
-        }
-
-        .achievements-list li {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s;
-        }
-
-        .achievements-list li:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: white;
-            color: black;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 30px;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .button:hover {
-            background: black;
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #121212;
-            color: #bbb;
-            font-size: 0.9rem;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Image Style */
-        .logo1 {
-            margin-top: 20px;
-            border: 5px solid #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 150px;
-            height: 150px;
-            animation: fadeIn 2s ease-in-out;
-        }
-
+        /* Animation Keyframes */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -131,61 +90,51 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
             }
-
-            .button {
-                padding: 10px 20px;
-                font-size: 1rem;
+            100% {
+                transform: translateY(0);
+                opacity: 1;
             }
+        }
 
-            .achievements-container {
-                width: 90%;
-                padding: 20px;
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Section with Interactive Canvas -->
-    <div class="background-section">
-        <canvas id="interactiveCanvas"></canvas>
-        <div class="achievements-container" data-aos="fade-up">
-            <h1 data-aos="fade-down">My Achievements</h1>
-            <ul class="achievements-list" data-aos="zoom-in">
-                <li>Completed a fully functional web project using React and Node.js.</li>
-                <li>Contributed to several open-source projects on GitHub.</li>
-                <li>Acquired 6th rank in MITM ECE-Hackathon by making a patient health and appointment app.</li>
-                <li>Very good at chess and close to getting the title of "Master" on chess.com (username: yashugowda25).</li><br>
-                <img src="qr.jpg" alt="QR Code" class="logo1" data-aos="fade-up">
-                <li>Created a mobile app using Flutter that helps users track their daily tasks.</li>
-                <li>Completed courses in JavaScript, C Programming, Java, and currently learning Python and Dart.</li>
-            </ul>
-            <div data-aos="flip-up">
-                <a href="certificates.html" class="button">View Certificates</a>
-                <a href="hello.html" class="button">Back to Home</a>
-            </div>
-        </div>
+    <!-- Background Interactive Canvas -->
+    <canvas id="interactiveCanvas"></canvas>
+
+    <!-- Achievements Container -->
+    <div class="achievements-container">
+        <h1>My Achievements</h1>
+        <ul class="achievements-list">
+            <li>Completed a fully functional web project using React and Node.js.</li>
+            <li>Contributed to several open-source projects on GitHub.</li>
+            <li>Acquired 6th rank in MITM ECE-Hackathon by making a patient health and appointment app.</li>
+            <li>Very skilled in chess, currently working towards earning the "Master" title on chess.com (user: yashugowda25).</li>
+            <br><img src="qr.jpg" alt="QR Code" class="logo1">
+            <li>Created a mobile app using Flutter that helps users track their daily tasks.</li>
+            <li>Completed courses in JavaScript, C-Programming, JAVA, and currently learning Python and Dart.</li>
+        </ul>
+        <a href="certificates.html" class="button">View Certificates</a>
+        <a href="hello.html" class="button">Back to Home</a>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        © 2024 Yashwanth Gowda KS. All rights reserved.
-    </footer>
-
-    <!-- AOS Script -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1200, // Animation duration
-            easing: 'ease-in-out', // Easing function
-            once: true // Animation happens once
-        });
-
-        // JavaScript for Interactive Canvas
+        // Interactive Canvas for background effect
         const canvas = document.getElementById('interactiveCanvas');
         const ctx = canvas.getContext('2d');
 
