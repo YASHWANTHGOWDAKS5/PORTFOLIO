@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Yashwanth Gowda KS</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- AOS Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
     <style>
         .co2 {
             color: #FF8C00;
@@ -125,11 +128,140 @@
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, #FF
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #121212;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .intro-text,
+            .second-text {
+                font-size: 1rem;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Section with Interactive Canvas -->
+    <div class="background-section" data-aos="fade-in">
+        <canvas id="interactiveCanvas"></canvas>
+        <div class="logo-container">
+            <img src="yashu25.jpg" alt="Logo" class="logo">
+            <h1>Yashwanth <span class="co2">Gowda</span> KS</h1>
+        </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="description-section">
+        <p class="intro-text" data-aos="fade-up">Hi, I am Yashwanth. I am a passionate web developer with a keen interest in blockchain technologies...</p>
+        <p class="second-text" data-aos="fade-up">I have worked on various personal and professional projects...</p>
+    </div>
+
+    <!-- Button Container -->
+    <div class="button-container">
+        <a href="my-works.html" class="button" data-aos="zoom-in">My Works</a>
+        <a href="interested-in.html" class="button" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
+        <a href="mastered-in.html" class="button" data-aos="zoom-in" data-aos-delay="200">Mastered In</a>
+        <a href="achievements.html" class="button" data-aos="zoom-in" data-aos-delay="300">Achievements</a>
+        <a href="profile.html" class="button" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 Yashwanth Gowda KS. All rights reserved.
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init(); // Initialize AOS
+    </script>
+
+    <!-- Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('interactiveCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 3;
+                this.xSpeed = Math.random() * 2 - 1;
+                this.ySpeed = Math.random() * 2 - 1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            update() {
+                this.x += this.xSpeed;
+                this.y += this.ySpeed;
+
+                if (this.x < 0 || this.x > canvas.width) this.xSpeed *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.ySpeed *= -1;
+            }
+        }
+
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle) => {
+                particle.update();
+                particle.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
