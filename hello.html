@@ -45,6 +45,38 @@
             width: 100%;
             height: 100%;
         }
+	    /* From Uiverse.io by niat786 */ 
+button12 {
+ border: none;
+ color: #fff;
+ background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+ border-radius: 20px;
+ background-size: 100% auto;
+ font-family: inherit;
+ font-size: 17px;
+ padding: 0.6em 1.5em;
+}
+
+button:hover {
+ background-position: right center;
+ background-size: 200% auto;
+ -webkit-animation: pulse 2s infinite;
+ animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+ 0% {
+  box-shadow: 0 0 0 0 #05bada66;
+ }
+
+ 70% {
+  box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+ }
+
+ 100% {
+  box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+ }
+}
 
         .logo-container {
             position: relative;
@@ -693,11 +725,11 @@ I take pride in my commitment to constant learning and open-source contributions
 
     <!-- Button Container -->
     <div class="button-container">
-        <a href="my-works.html" class="button" data-aos="zoom-in">My Works</a>
-        <a href="interested-in.html" class="button" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
-        <a href="mastered-in.html" class="button" data-aos="zoom-in" data-aos-delay="200">Mastered In</a>
-        <a href="achievements.html" class="button" data-aos="zoom-in" data-aos-delay="300">Achievements</a>
-        <a href="profile.html" class="button" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
+        <a href="my-works.html" class="button12" data-aos="zoom-in">My Works</a>
+        <a href="interested-in.html" class="button12" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
+        <a href="mastered-in.html" class="button12" data-aos="zoom-in" data-aos-delay="200">Mastered In</a>
+        <a href="achievements.html" class="button12" data-aos="zoom-in" data-aos-delay="300">Achievements</a>
+        <a href="profile.html" class="button12" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
     </div>
 
     <!-- Footer -->
