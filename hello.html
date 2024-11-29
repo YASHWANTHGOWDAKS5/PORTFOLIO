@@ -608,7 +608,7 @@ button:hover {
             padding: 30px;
         }
 
-        .button {
+        .button3 {
             display: inline-block;
             padding: 15px 30px;
             color: white;
@@ -623,7 +623,7 @@ button:hover {
             overflow: hidden;
         }
 
-        .button:hover {
+        .button3:hover {
 		border-radius: 10px;
             color: white;
             background: black;
@@ -637,6 +637,80 @@ button:hover {
             background: #0f2027;
             color: #bbb;
             font-size: 0.9rem;
+        }
+button {
+            height: 4em;
+            width: 18em;
+            border: none;
+            border-radius: 40px;
+            background-color: rgba(128, 0, 128, 0.1); /* Light purple with 10% opacity */;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button span {
+            z-index: 1;
+            display: inline-block;
+            background-color: black;
+            height: 3em;
+            width: 12em;
+            border-radius: 25px;
+            color: #fff;
+            line-height: 55px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            transition: all 0.5s;
+        }
+
+        button .container {
+            z-index: -1;
+            width: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            transition: all 0.4s;
+            opacity: 0;
+            background-color: transparent; /* Transparent background */
+            border: 1px solid purple; /* Purple border */
+            border-radius: 25px;
+            padding: 10px;
+        }
+
+        button .container svg {
+            padding: 0 10px;
+            cursor: pointer;
+            width: 25px; /* Icon size */
+            height: 25px; /* Icon size */
+            transition: transform 0.3s ease;
+        }
+
+        /* WhatsApp Icon Color */
+        .whatsapp-icon {
+            fill: #25D366;
+        }
+
+        /* Telegram Icon Color */
+        .telegram-icon {
+            fill: #0088cc;
+        }
+
+        button:hover span {
+            width: 0;
+        }
+
+        button:hover .container {
+            z-index: 2;
+            width: 100%;
+            opacity: 1;
+        }
+
+        button .container svg:hover {
+            transform: scale(1.2); /* Slight zoom on hover */
         }
 
         /* Responsive Design */
@@ -698,39 +772,45 @@ button:hover {
         <p class="second-text">With a robust foundation in programming, I am Yashwanth Gowda KS, <br>a web developer passionate about designing intuitive and high-performance applications. <br>My technical expertise spans across languages such as <span class="co2">Java, JavaScript, Python, C, Dart, and deep understanding of Data Structures</span>. <br>I specialize in building responsive, scalable web solutions that leverage the latest frameworks and technologies.<br> My proficiency in Java and C has honed my ability to solve complex algorithmic challenges, while JavaScript and Dart empower me to create dynamic and engaging front-end experiences.<br> Through projects ranging from full-stack development to cutting-edge interactive UI designs, I aim to bridge the gap between functionality and user experience.<br>
 
 I take pride in my commitment to constant learning and open-source contributions, always seeking to implement clean, efficient code in every project. <br>My passion for tackling complex technical challenges is matched only by my interest in emerging technologies, such as blockchain and cloud computing, allowing me to stay ahead in the ever-evolving tech landscape.
-	<div class="section-center">
-  <div class="section-path">
-    <div class="globe">
-      <div class="wrapper">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
- </div></p>
+ <button>
+        <span>Share PAGE</span>
+        <div class="container">
+            <!-- WhatsApp Icon -->
+            <a href="https://wa.me/?text=Check%20this%20out:%20https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html" target="_blank">
+                <svg
+                    class="icon whatsapp-icon"
+                    viewBox="0 0 1024 1024"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M511.9936 0C229.888 0 0 229.888 0 511.9936c0 140.7232 57.856 276.3776 160.9728 374.784l-21.1968 137.984 140.5952-20.1728c93.0816 49.0496 198.5536 74.5984 307.6736 74.5984 282.0608 0 511.9936-229.888 511.9936-511.9936S794.0544 0 511.9936 0zm243.3536 755.2c-23.4496 64.4608-91.5456 108.3904-163.4816 118.1696-32.1024 4.8128-74.752-2.048-221.44-73.9328C204.8 726.9376 182.784 588.1856 184.1152 586.0864c-1.2288-0.9216-28.0576-23.6544-44.0832-59.648-16.5888-37.1712-18.1248-70.7584-16.0768-91.648 1.6384-17.2544 7.168-33.1776 16.64-47.9232 1.6384-2.8672 11.5712-20.8896 14.7456-26.0096 19.5072-32.8192 49.4592-52.8128 84.48-52.8128 9.8304 0 18.8928 0.512 26.752 1.4848 1.4336 0.2048 2.8672 0.512 4.5056 0.7168 3.584 0.512 5.7344 0.8192 6.656 1.1264 4.9152 1.6384 9.5232 4.8128 13.312 9.216 2.6624 3.072 6.2464 7.4752 8.3968 13.5168 10.2408 29.7472 28.4672 85.0944 55.8592 97.6896 3.584 1.6384 6.656 3.8912 10.0352 5.632 2.4576 1.024 5.3248 2.2528 7.9872 3.072 8.0896 2.4576 14.1312 2.8672 19.456 3.584 12.6976 2.4576 21.6064-3.4816 30.6176-13.0048 1.024-1.024 4.3008-4.9152 5.7344-6.2464 0.7168-0.6144 1.6384-1.3312 2.4576-2.048 4.7104-3.3792 9.1136-4.9152 13.312-5.7344 4.9152-1.024 9.4208-0.4096 13.7216 1.2288 2.048 0.7168 3.7888 1.6384 5.7344 2.8672 8.3968 5.120 16.9984 11.0592 24.6784 18.0224 15.9744 13.312 31.9488 28.4672 43.4176 44.1856 1.6384 2.2528 7.9872 11.6736 14.336 21.1968 5.5296 8.704 12.9024 20.0704 21.6064 33.6896 1.3312 1.6384 2.2528 3.072 3.2768 4.8128 10.0352 17.4592 17.664 35.328 23.6544 52.8128 3.3792 10.4448 5.3248 20.8896 6.4512 31.232 1.024 7.9872 0.9216 15.9744-0.2048 24.064z"
+                    ></path>
+                </svg>
+            </a>
+            <!-- Telegram Icon -->
+            <a href="https://t.me/share/url?url=https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html&text=Check%20this%20out!" target="_blank">
+                <svg
+                    class="icon telegram-icon"
+                    viewBox="0 0 1024 1024"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M512 0C229.2 0 0 229.2 0 512s229.2 512 512 512 512-229.2 512-512S794.8 0 512 0zm223.2 350.8l-99.2 472.4c-3.2 16-22.4 23.6-35.2 14.4L430.8 670l-84.4 81.2c-9.6 9.6-25.6 4.8-28-8.4L270.4 576 576 380.8c12-6.4 0-24-12-19.2L239.6 497.2c-14.8 5.6-30-3.2-28-19.2l18.4-101.6c1.2-8 7.2-14.8 15.2-17.6l479.6-172.8c14.4-5.2 29.2 8 24.8 22.8z"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </button>
+</p>
     </div>
 
     <!-- Button Container -->
     <div class="button-container">
-        <a href="my-works.html" class="button" data-aos="zoom-in">My Works</a>
-        <a href="interested-in.html" class="button" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
-        <a href="mastered-in.html" class="button" data-aos="zoom-in" data-aos-delay="200">Mastered In</a>
-        <a href="achievements.html" class="button" data-aos="zoom-in" data-aos-delay="300">Achievements</a>
-        <a href="profile.html" class="button" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
+        <a href="my-works.html" class="button3" data-aos="zoom-in">My Works</a>
+        <a href="interested-in.html" class="button3" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
+        <a href="mastered-in.html" class="button3" data-aos="zoom-in" data-aos-delay="200">Mastered In</a>
+        <a href="achievements.html" class="button3" data-aos="zoom-in" data-aos-delay="300">Achievements</a>
+        <a href="profile.html" class="button3" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
     </div>
 
     <!-- Footer -->
