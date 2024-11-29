@@ -39,25 +39,30 @@
             height: 100%;
         }
 
-        .logo-container {
+        .content-container {
             position: relative;
             z-index: 2;
             text-align: center;
             padding: 30px;
+            animation: fadeIn 2s ease-in;
         }
 
-        .logo {
-            width: 270px;
-            height: 270px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         h1 {
             font-size: 3rem;
             letter-spacing: 2px;
             color: #fff;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
         }
 
         .button1 {
@@ -71,6 +76,13 @@
             font-weight: bold;
             transition: background 0.3s, transform 0.3s;
             text-align: center;
+            margin: 10px;
+            animation: popIn 1s ease-in-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .button1:hover {
@@ -98,11 +110,23 @@
         .intro-text {
             font-size: 1.3rem;
             margin-bottom: 15px;
+            animation: fadeInLeft 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .second-text {
             font-size: 1.1rem;
             color: #bbb;
+            animation: fadeInRight 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         /* Responsive Design */
@@ -121,47 +145,13 @@
             }
         }
 
-        /* Typing animation */
-        .typing-container {
-            width: fit-content;
-            border-right: 2px solid black; /* Cursor effect */
-            white-space: nowrap; /* Prevents wrapping */
-            overflow: hidden; /* Hides overflowing text for the effect */
-            font-family: monospace; /* Typewriter-like font */
-            font-size: 1.5rem;
-        }
-
-        .typing-text {
-            display: inline-block;
-            animation: typing 4s steps(22, end), blink 0.5s step-end infinite alternate;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 22ch;
-            }
-        }
-
-        @keyframes blink {
-            from {
-                border-right-color: black;
-            }
-            to {
-                border-right-color: transparent;
-            }
-        }
-
     </style>
 </head>
 <body>
     <!-- Background Section with Interactive Canvas -->
     <div class="background-section">
         <canvas id="interactiveCanvas"></canvas>
-        <div class="logo-container">
-            <img src="h1.jpg" alt="Logo" class="logo">
+        <div class="content-container">
             <h1>My Works</h1>
             <p>Here are some of the projects I have worked on:</p>
             <ul>
@@ -169,7 +159,7 @@
                 <br> 
                 <a href="https://yashwanthgowdaks5.github.io/cv/cv%20Maker.html" class="button1"><u>CV generator</u></a>
                 <br><br>
-                <li> I am currently working on a Patient Engagement and Education App using Flutter (Dart)</li> 
+                <li>I am currently working on a Patient Engagement and Education App using Flutter (Dart)</li> 
             </ul>
             <a href="hello.html" class="button1">Back to Home</a>
         </div>
