@@ -28,6 +28,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             overflow: hidden;
         }
 
@@ -132,6 +133,60 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
+        /* Share Button and Icons */
+        .share-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .share-button {
+            padding: 10px 20px;
+            background: white;
+            color: black;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-icons {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .share-button:hover .share-icons {
+            display: flex;
+        }
+
+        .share-icon {
+            margin: 5px 0;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .share-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .share-icon img:hover {
+            transform: scale(1.1);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -145,6 +200,15 @@
             .button1 {
                 padding: 10px 20px;
                 font-size: 1rem;
+            }
+
+            .share-button {
+                font-size: 1rem;
+            }
+
+            .share-icon {
+                width: 30px;
+                height: 30px;
             }
         }
 
@@ -165,6 +229,21 @@
                 <li>I am currently working on a Patient Engagement and Education App using Flutter (Dart)</li> 
             </ul>
             <a href="hello.html" class="button1">Back to Home</a>
+
+            <!-- Share Button -->
+            <div class="share-container">
+                <div class="share-button">
+                    Share
+                    <div class="share-icons">
+                        <div class="share-icon" onclick="shareWhatsApp()">
+                            <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
+                        </div>
+                        <div class="share-icon" onclick="shareTelegram()">
+                            <img src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -219,7 +298,8 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                       [_{{{CITATION{{{_1{](https://github.com/buribalazs/smooth-drag-order/tree/7b40d21d076c3e31765f61481f537beaf4c5ec9f/README.md)[_{{{CITATION{{{_2{](https://github.com/fireun/Masomon-Online-Shopping/tree/6fa264f2c43c095aa821a7eafd80b8ca66a77afe/user%2FcancellationRequest.php)[_{{{CITATION{{{_3{](https://github.com/pacifio/learning-dom/tree/5c8cc7133e19d4d8cd51007d18f36bda95032686/fireworks%2Fscript.js)[_{{{CITATION{{{_4{](https://github.com/pacifio/learning-dom/tree/5c8cc7133e19d4d8cd51007d18f36bda95032686/basic-canvas%2Fscript.js)
+                                                                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
                         ctx.lineWidth = 1;
                         ctx.stroke();
                         ctx.closePath();
@@ -241,6 +321,19 @@
         }
 
         animate();
+
+        // Sharing Functions
+        function shareWhatsApp() {
+            const url = "https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html";
+            const text = `Check out this awesome portfolio: ${url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareTelegram() {
+            const url = "https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html";
+            const text = `Check out this awesome portfolio: ${url}`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+        }
     </script>
 </body>
 </html>
