@@ -644,14 +644,23 @@ button {
     width: 15em;
     border: none;
     border-radius: 40px;
-    background-color: #fff;
+    background: linear-gradient(135deg, #6a0dad, #8a2be2);
+    color: #fff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 button span {
     z-index: 1;
     display: inline-block;
-    background-color: black;
     height: 3em;
     width: 11.5em;
     border-radius: 25px;
@@ -668,17 +677,14 @@ button .container {
     position: relative;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 15px;
     transform: translateY(-50px);
-    transition: all 0.4s;
-    background-color: rgba(128, 0, 128, 0.1); /* Transparent purple */
-    border: 1px solid purple; /* Border color */
+    background: rgba(128, 0, 128, 0.1); /* Transparent purple */
+    border: 1px solid purple;
     border-radius: 25px;
     padding: 10px;
-}
-
-button .container svg {
-    padding: 0 10px;
+    transition: all 0.4s ease-in-out;
 }
 
 button:hover span {
@@ -691,16 +697,15 @@ button:hover .container {
     opacity: 1;
 }
 
-button .container a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+button .container svg.icon {
+    height: 30px;
+    width: 30px;
 }
 
-button .container svg.icon {
-    height: 35px;
-    width: 35px;
+button .container a {
+    text-decoration: none;
 }
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -766,7 +771,7 @@ I take pride in my commitment to constant learning and open-source contributions
     <button>
         <span>Share</span>
         <div class="container">
-            <!-- WhatsApp Share Icon -->
+            <!-- WhatsApp Icon -->
             <a href="https://api.whatsapp.com/send?text=https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html" target="_blank" title="Share via WhatsApp">
                 <svg
                     class="icon"
@@ -786,7 +791,7 @@ I take pride in my commitment to constant learning and open-source contributions
                     ></path>
                 </svg>
             </a>
-            <!-- Telegram Share Icon -->
+            <!-- Telegram Icon -->
             <a href="https://t.me/share/url?url=https://yashwanthgowdaks5.github.io/PORTFOLIO/hello.html" target="_blank" title="Share via Telegram">
                 <svg
                     class="icon"
@@ -804,6 +809,7 @@ I take pride in my commitment to constant learning and open-source contributions
         </div>
     </button>
 </div>
+
 
 </p>
     </div>
