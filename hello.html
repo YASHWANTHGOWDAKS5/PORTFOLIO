@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Yashwanth Gowda KS</title>
 
-    <!-- AOS Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -19,26 +18,23 @@
         body {
             font-family: 'Arial', sans-serif;
             color: #fff;
-            background: linear-gradient(to bottom, #2c3e50, #34495e, #5d6d7e); /* Updated gradient for background */
+            background: linear-gradient(to bottom, #2c3e50, #34495e, #5d6d7e);
             overflow-x: hidden;
             display: flex;
-            flex-direction: column; /* Stack all sections vertically */
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100%;
+            justify-content: center;
             min-height: 100vh;
-            padding: 0;
         }
 
-        /* Background Section */
         .background-section {
             position: relative;
             text-align: center;
-            min-height: 100vh;
+            width: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
             overflow: hidden;
         }
 
@@ -50,15 +46,11 @@
             height: 100%;
         }
 
-        .co2 {
-            color: #FF8C00;
-        }
+        .co2 { color: #FF8C00; }
 
-        /* Logo and Title */
         .logo-container {
             z-index: 2;
             text-align: center;
-            padding: 30px;
         }
 
         .logo {
@@ -75,17 +67,13 @@
             color: #fff;
         }
 
-        /* Interactive Button (Download) */
         .container {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
+        /* Button Styles */
         .label {
             background-color: transparent;
             border: 2px solid rgb(91, 91, 240);
@@ -94,14 +82,12 @@
             border-radius: 50px;
             width: 160px;
             cursor: pointer;
-            transition: all 0.4s ease;
             padding: 5px;
             position: relative;
+            transition: all 0.4s ease;
         }
 
-        .label .input {
-            display: none;
-        }
+        .label .input { display: none; }
 
         .label .title {
             font-size: 17px;
@@ -131,16 +117,21 @@
             transform: translate(-50%, -50%);
         }
 
+        /* Animation on click */
         .label:has(.input:checked) {
             width: 57px;
+            animation: installed 0.4s ease 3.5s forwards;
         }
 
         .label .input:checked + .circle {
-            animation:
-                pulse 1s forwards,
-                circleDelete 0.2s ease 3.5s forwards;
+            animation: pulse 1s forwards, circleDelete 0.2s ease 3.5s forwards;
         }
 
+        .label .input:checked + .circle::before {
+            animation: installing 3s ease-in-out forwards;
+        }
+
+        /* Keyframes */
         @keyframes pulse {
             0% {
                 scale: 0.95;
@@ -156,36 +147,35 @@
             }
         }
 
+        @keyframes installing {
+            from { height: 0; }
+            to { height: 100%; }
+        }
+
+        @keyframes installed {
+            100% {
+                width: 150px;
+                border-color: rgb(35, 174, 35);
+            }
+        }
+
+        @keyframes circleDelete {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
         /* Description Section */
         .description-section {
             padding: 60px 20px;
             text-align: center;
             line-height: 1.8;
-            max-width: 1000px;
-            margin: 20px;
-        }
-
-        .intro-text,
-        .second-text {
-            max-width: 800px;
-            margin: 10px auto 20px auto;
             color: #ddd;
         }
 
-        .intro-text {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .second-text {
-            font-size: 1.1rem;
-            color: #bbb;
-        }
-
-        /* Button Container */
         .button-container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
             padding: 30px;
@@ -201,7 +191,6 @@
             font-size: 1.2rem;
             font-weight: bold;
             transition: all 0.4s ease-in-out;
-            text-align: center;
         }
 
         .button3:hover {
@@ -218,15 +207,9 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
-            }
-
-            .intro-text,
-            .second-text {
-                font-size: 1rem;
             }
 
             .button3 {
@@ -237,7 +220,6 @@
     </style>
 </head>
 <body>
-    <!-- Background Section with Interactive Canvas -->
     <div class="background-section" data-aos="fade-in">
         <canvas id="interactiveCanvas"></canvas>
         <div class="logo-container">
@@ -255,7 +237,6 @@
                     <p class="title"></p>
                 </label>
             </div>
-
             <script>
                 const button = document.getElementById("triggerButton");
 
@@ -273,17 +254,19 @@
         </div>
     </div>
 
-    <!-- Description Section -->
     <div class="description-section" data-aos="fade-up">
-        <p class="intro-text">Hi, I am currently gaining information and knowledge from<h2>Maharaja Institute of Technology<br><span class="co2"> Mysore</span></h2></p>
-        <p class="second-text">With a robust foundation in programming, I am Yashwanth Gowda KS, a web developer passionate about designing intuitive and high-performance applications. My technical expertise spans across languages such as <span class="co2">Java, JavaScript, Python, C, Dart, and deep understanding of Data Structures</span>.<br>I specialize in building responsive, scalable web solutions that leverage the latest frameworks and technologies.
+        <p>Hi, I am currently gaining information and knowledge from<h2>Maharaja Institute of Technology<br><span class="co2"> Mysore</span></h2></p>
+        <p>With a robust foundation in programming, I am Yashwanth Gowda KS, a web developer passionate about designing intuitive and high-performance applications. My technical expertise spans across languages such as <span class="co2">Java, JavaScript, Python, C, Dart, and deep understanding of Data Structures</span>.I specialize in building responsive, scalable web solutions that leverage the latest frameworks and technologies.
+My proficiency in Java and C has honed my ability to solve complex algorithmic challenges, while JavaScript and Dart empower me to create dynamic and engaging front-end experiences.
+<br>Through projects ranging from full-stack development to cutting-edge interactive UI designs, <br>I aim to bridge the gap between functionality and user experience.
+<br>I take pride in my commitment to constant learning and open-source contributions, always seeking to implement clean, efficient code in every project.
+My passion for tackling complex technical challenges is matched only by my interest in emerging technologies, <br>such as blockchain and cloud computing, allowing me to stay ahead in the ever-evolving tech landscape.I specialize in building responsive, scalable web solutions that leverage the latest frameworks and technologies.
 My proficiency in Java and C has honed my ability to solve complex algorithmic challenges, while JavaScript and Dart empower me to create dynamic and engaging front-end experiences.
 <br>Through projects ranging from full-stack development to cutting-edge interactive UI designs, <br>I aim to bridge the gap between functionality and user experience.
 <br>I take pride in my commitment to constant learning and open-source contributions, always seeking to implement clean, efficient code in every project.
 My passion for tackling complex technical challenges is matched only by my interest in emerging technologies, <br>such as blockchain and cloud computing, allowing me to stay ahead in the ever-evolving tech landscape.</p>
     </div>
 
-    <!-- Button Container -->
     <div class="button-container">
         <a href="my-works.html" class="button3" data-aos="zoom-in">My Works</a>
         <a href="interested-in.html" class="button3" data-aos="zoom-in" data-aos-delay="100">I Am Interested In</a>
@@ -292,18 +275,15 @@ My passion for tackling complex technical challenges is matched only by my inter
         <a href="profile.html" class="button3" data-aos="zoom-in" data-aos-delay="400">Profiles & Contact</a>
     </div>
 
-    <!-- Footer -->
     <footer>
         © 2024 Yashwanth Gowda KS. All rights reserved.
     </footer>
 
-    <!-- AOS Script -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init(); // Initialize AOS
     </script>
 
-    <!-- Canvas Animation Script -->
     <script>
         const canvas = document.getElementById('interactiveCanvas');
         const ctx = canvas.getContext('2d');
