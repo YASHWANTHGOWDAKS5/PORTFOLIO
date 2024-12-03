@@ -436,9 +436,11 @@ button:hover {
             <img src="t5.jpg" alt="Logo" class="logo">
             <h1>Yashwanth <span class="co2">Gowda</span> KS</h1>
               <label class="label">
-    <input type="checkbox" class="input" />
-    <span class="circle"
-      ><svg
+    <div class="container">
+  <label class="label">
+    <input type="checkbox" class="input" id="triggerButton" />
+    <span class="circle">
+      <svg
         class="icon"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
@@ -455,11 +457,27 @@ button:hover {
       </svg>
       <div class="square"></div>
     </span>
-    <p class="title">Get my CV</p>
+    <p class="title">Download</p>
     <p class="title">Open</p>
   </label>
 </div>
-        </div>
+
+<script>
+  const button = document.getElementById("triggerButton");
+
+  button.addEventListener("change", function () {
+    if (button.checked) {
+      setTimeout(() => {
+        // Create an anchor element and trigger the download
+        const link = document.createElement("a");
+        link.href = "Yashwanth%20Gowda%20K%20S%20CV.pdf"; // File URL
+        link.download = "Yashwanth Gowda K S CV.pdf"; // Downloaded file name
+        link.click(); // Trigger the download
+      }, 3000); // Wait for 3 seconds
+    }
+  });
+</script>
+
     </div>
 
     <!-- Description Section -->
