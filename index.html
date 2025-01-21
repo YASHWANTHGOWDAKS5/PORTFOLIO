@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Page</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      z-index: 1000;
+      animation: fadeOut 1s forwards ease 4s;
+    }
+
+    .loading-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .loading-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: cyan;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .loading-circle:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-circle:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .main-content {
+      opacity: 0;
+      animation: fadeIn 2s forwards ease 5s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 700px;
+      background: white;
+      color: black;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+      position: relative;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: cyan;
+    }
+
+    .indicator {
+      position: absolute;
+      bottom: -5px;
+      height: 4px;
+      width: 70px;
+      background: cyan;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      gap: 20px;
+      background: rgb(44, 42, 42);
+      color: rgb(255, 254, 254);
+    }
+
+    section img {
+      max-width: 780px;
+      height: auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #intro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+      background: linear-gradient(145deg, #121212, #222);
+      color: white;
+      position: relative;
+    }
+
+    #intro img {
+      border-radius: 50%;
+      rotate: 44deg;
+      max-width: 300px;
+      height: 300px;
+      margin: 10px 0 0 10px;
+    }
+
+    #intro div {
+      margin-left: 20px;
+    }
+
+    #intro h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: cyan;
+    }
+
+    #intro p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Styling for the scrolling name section */
+    .scrolling-name {
+      position: absolute;
+      bottom: 20px; /* Distance from the bottom of the screen */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Center the element */
+      height: 20vh; /* Adjust height relative to viewport height for responsiveness */
+      width: 90%; /* Make it responsive, taking up 90% of the screen width */
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: center;
+      z-index: -1; /* Ensure text is behind other content (e.g., logo) */
+      margin: 0;
+    }
+
+    .scrolling-name span {
+      display: inline-block;
+      animation: scroll 60s linear infinite; /* Slower animation for readability */
+      font-size: 10vw; /* Font size relative to viewport width for responsiveness */
+      color: rgb(246, 246, 246); /* Sky blue color */
+      white-space: nowrap;
+    }
+
+    .scrolling-name span::after {
+      content: "YASHUGOWDAYASHUGOWDA";
+    }
+
+    /* Adjust keyframes for smooth scrolling */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0); /* Start text from the left side */
+      }
+      100% {
+        transform: translateX(-100%); /* End at the far left */
+      }
+    }
+
+    section div {
+      max-width: 500px;
+      color: black;
+    }
+
+    .hex-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+      grid-gap: 10px;
+      justify-content: center;
+      align-content: center;
+    }
+
+    .hex {
+      width: 100px;
+      height: 86.6px;
+      background: transparent;
+      position: relative;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      border: 2px solid #333;
+      transition: border-color 0.3s;
+    }
+
+    .hex:hover {
+      border-color: cyan;
+    }
+
+    .scroll-effect {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+
+    .scroll-effect.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        width: 90%;
+        padding: 10px;
+      }
+
+      .navbar a {
+        font-size: 14px;
+      }
+
+      .indicator {
+        height: 3px;
+      }
+
+      @font-face {
+        font-family: 'MyCustomFont';
+        src: url('fonts/MyCustomFont.woff2') format('woff2'),
+             url('fonts/MyCustomFont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      section {
+        padding: 30px 10px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      section img {
+        margin-bottom: 20px;
+      }
+
+      .hex {
+        width: 70px;
+        height: 60.6px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 8px;
+      }
+
+      .navbar a {
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      .indicator {
+        height: 2px;
+      }
+
+      .hex {
+        width: 50px;
+        height: 43.3px;
+      }
+
+      #intro {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+      }
+
+      #intro h1 {
+        font-size: 2.5rem;
+      }
+
+      #intro p {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Styling for the heading */
+    .heading-container {
+      text-align: center;
+      position: relative;
+      z-index: 1; /* Ensure the heading is above the scrolling text */
+      margin-bottom: 20px; /* Spacing between heading and content */
+    }
+
+    .heading {
+      font-size: 2.5rem;
+      color: skyblue; /* Sky blue color */
+      font-family: 'Arial', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      opacity: 0;
+      animation: openEffect 2s forwards; /* Animation to create the open effect */
+    }
+
+    /* Open effect animation */
+    @keyframes openEffect {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+       /* Existing styles remain unchanged */
+    /* Add some specific styles for the contact section */
+    #contact {
+      background: url(webbackground.jpg);
+      color: rgb(6, 5, 5);
+    }
+    #contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: cyan;
+    }
+    #contact form {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #f5f3f3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    #contact form input,
+    #contact form textarea,
+    #contact form button {
+      width: 300px;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    #contact form input,
+    #contact form textarea {
+      background: #333;
+      color: white;
+    }
+    #contact form button {
+      background: cyan;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    #contact form button:hover {
+      background: #00bcd4;
+    }
+    #tech-arsenal {
+  padding: 50px 20px;
+  text-align: center;
+  color: #fff;
+}
+.section-title {
+  font-size: 2rem;
+  color: #3a7bd5;
+  margin-bottom: 30px;
+}
+.arsenal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.arsenal-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.arsenal-item {
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #e23008;
+  background-color: #f8f9fb; /* Box color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 1.8s ease-in-out;
+}
+/* For slide-in animations */
+.scroll-effect.slide-in-left {
+  transform: translateX(-100%);
+}
+.scroll-effect.slide-in-right {
+  transform: translateX(100%);
+}
+.scroll-effect.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; margin-top: 40px; } .project-card { background: white; padding: 20px; border-radius: 10px; position: relative; transition: transform 0.3s, box-shadow 0.3s; } .project-card:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: rgb(255, 251, 251); background-color: black;} .popup-content { display: none; position: absolute; top: -100%; left: -150%; width: 100%; height: 100%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 10; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: translateY(-10px); } .project-card:hover .popup-content { display: block; opacity: 1; transform: translateY(0); }
+#circle {
+  position: absolute;
+  width: 17px;  /* Circle size */
+  height: 17px;
+  background-color: rgb(0, 200, 255);
+  border-radius: 50%;  /* Makes it a circle */
+  pointer-events: none;  /* Ensures it doesn't interfere with clicking */
+  transition: transform 0.1s ease;
+  z-index: 9999;  /* Ensures it's always on top */
+
+}
+
+  </style>
+</head>
+<body>
+  <div id="circle"></div>
+  <div class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-circle"></div>
+      <div class="loading-circle"></div>
+      <div class="loading-circle"></div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="navbar">
+      <a href="#intro" id="nav-intro">About</a>
+      <a href="#projects" id="nav-projects">Projects</a>
+      <a href="#achievements" id="nav-achievements">Achievements</a>
+      <a href="#skills" id="nav-contact">Skills</a>
+      <a href="#contact" id="nav-contact">Contact</a>
+      <div class="indicator"></div>
+    </div>
+
+    <div class="hex-background">
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+    </div>
+    <section id="intro" class="scroll-effect">
+      <div>
+        <h1>Hi, I'm Yashwanth Gowda KS</h1>
+        <p>Welcome to my Portfolio webpage! I’m a aspiring AI Engineer at MIT Mysore. Explore my projects and achievements below.</p>
+      </div>
+      <img src="1234-removebg-preview.png" alt="Yashwanth's Image">
+      <div class="scrolling-name" style="margin-bottom: 59px;">
+        <span>YASHUGOWDAYASHUGOWDA</span>
+      </div>
+      <div class="heading-container">
+        <h1 class="heading" style="font-family: 'Arial', sans-serif;">VASAcreation</h1>
+        <p>As the founder and leader of this organization, I work alongside a talented team to drive innovation and develop cutting-edge solutions.</p>
+      </div>
+    </section>
+    
+
+    <section id="projects" class="scroll-effect" style="background: url(webbackground.jpg);">
+      <img src="part2.png" alt="Projects Image" style="height: 400px; width: 500px;">
+    <div style="margin-bottom: 65px;">
+      <h1 style=" transition: all 1.8s ease-in-out; color: rgb(19, 135, 236); font-size: 71px; font-family: Georgia, 'Times New Roman', Times, serif; background: linear-gradient(45deg, rgb(253, 254, 255), black);"> &nbsp; &nbsp;MY WORKS</h1>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Zero Waste Kitchen</h3>
+          <p>Built using:<br>Nodejs,Express<br>MongoDB,React.</p>
+          <div class="popup-content">
+            <h3>Details</h3>
+             <p>A platform to control food waste by using them before they get expired.By knowing what dish to prepare in order to utilize the items that near to expiry</p>
+            </div>
+        </div>
+        <div class="project-card">
+          <h3>Patient Portal</h3>
+          <p>Built using:<br>Dart,MngoDB<br>FireBase.</p>
+          <div class="popup-content">
+            <h3>Details</h3>
+             <p>A application where a patient acan keep and organize his medical data and schedule his medicens to take on time and many more benifits,Mainly a patient can book his appointment once on visiting to a particuler doccter
+              .</p>
+            </div>
+        </div>
+        <div class="project-card">
+          <h3>Team Connect</h3>
+          <p>(A web page).Built using:<br>HTML,CSS<br>JavaScript</p>
+          <div class="popup-content">
+             <h3>Details</h3>
+              <p>A platform where a organization or a team can connect with one another to discuss ideas and can maintain records and files at one place and will be safe and available for all of the members of that perticular team or oprganization.</p>
+             </div>
+        </div>
+        <div class="project-card">
+          <h3>Credit Card<br> Fraud Detection</h3>
+          <p>Built Using:<br>Python(Machine learning<br>Model),<br>HTML,JavaScript<br>Bootstrap</p>
+          <div class="popup-content">
+            <h3>Details</h3>
+             <p>This one is my best project, wher any one can know if they had been in a credit ccard fraud by gathering their transaction details.</4p>
+            </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    
+
+    <section id="achievements" class="scroll-effect">
+      <div style="margin-bottom: 159px;">
+        <h1 style=" transition: all 1.8s ease-in-out; color: rgb(19, 135, 236); font-size: 71px; font-family: Georgia, 'Times New Roman', Times, serif;"> Achievements</h1>
+        <p style="font-size: 21px;margin-left: 14px;text-align: center; color: rgb(247, 247, 252); border: 20px; font-family: Georgia, 'Times New Roman', Times, serif;">I have collaborated effectively with my teammates in the capacity of a team leader and have successfully contributed to two projects in partnership with my seniors.(As of 2025).<br><br>Participated in three hackathons as the team leader, achieving a top 10 position in all three. The hackathons are as follows:<br><br>1.MITM EC-Department Hackathon(6th place)<br><br>2.PES-Banglore Finethon(14th place)<br><br>3.Bahuballi College of Engineering Hackathon<br><br><a href="certificates.html">certificates</a></p>
+      </div>
+      <img src="part1.png" alt="Achievements Image">
+    </section>
+    <section id="skills" class="scroll-effect">
+      <img src="part3.webp" alt="Contact Image">
+          <div class="arsenal-container">
+            <h1 style=" transition: all 1.8s ease-in-out; color: rgb(19, 135, 236); font-size: 71px; font-family: Georgia, 'Times New Roman', Times, serif;">Tech Arsenal</h1>
+            <div class="arsenal-row">
+              <div class="arsenal-item scroll-effect slide-in-left">HTML</div><br>
+              <br><div class="arsenal-item scroll-effect slide-in-left">CSS</div>
+              <div class="arsenal-item scroll-effect slide-in-left">JavaScript</div>
+              <div class="arsenal-item scroll-effect slide-in-left">Python</div>
+              <div class="arsenal-item scroll-effect slide-in-left">C</div>
+              <div class="arsenal-item scroll-effect slide-in-left">JAVA</div>
+            </div>
+            <div class="arsenal-row">
+              <div class="arsenal-item scroll-effect slide-in-right">SQL</div>
+              <div class="arsenal-item scroll-effect slide-in-right">Neuromorphic</div>
+              <div class="arsenal-item scroll-effect slide-in-right">MongoDB</div>
+              <div class="arsenal-item scroll-effect slide-in-right">Express.js</div>
+              <div class="arsenal-item scroll-effect slide-in-right">Node.js</div>
+              <div class="arsenal-item scroll-effect slide-in-right">React</div>
+            </div>
+            <p style="color: aliceblue; font-size: 27px;text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;">Available to provide expert guidance and clarification on the languages listed above.</p>
+          </div>
+    </section>
+    <section id="contact" class="scroll-effect">
+      <h2>Have any Ideas for me,<br>Lets Talk!</h2>
+      <form id="contact-form" novalidate>
+        <label for="name">Your Name:</label><br>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder="Enter your name" 
+          required 
+          aria-required="true"
+        /><br><br>
+      
+        <label for="email">Your Email:</label><br>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email" 
+          required 
+          aria-required="true"
+        /><br><br>
+      
+        <label for="message">Your Message:</label><br>
+        <textarea 
+          id="message" 
+          name="message" 
+          placeholder="Write your message here..." 
+          required 
+          aria-required="true"
+        ></textarea><br><br>
+      
+        <button type="submit" aria-label="Send your message">Send Message</button>
+      </form>
+      
+      
+      <p id="form-status" style="margin-top: 15px; color: cyan;"></p>
+    </section>
+  </div>
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<script type="text/javascript">
+(function(){
+emailjs.init({
+  publicKey: "YOUR_PUBLIC_KEY",
+});
+})();
+</script>
+
+  <script>
+    const circle = document.getElementById('circle');
+
+document.addEventListener('mousemove', function(event) {
+  const mouseX = event.pageX;
+  const mouseY = event.pageY;
+
+  // Update the circle's position based on the mouse position
+  circle.style.left = `${mouseX - circle.offsetWidth / 2}px`; // Centers the circle on the mouse
+  circle.style.top = `${mouseY - circle.offsetHeight / 2}px`;
+});
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const arsenalItems = document.querySelectorAll(".scroll-effect");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        } else {
+          entry.target.classList.remove("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  arsenalItems.forEach((item) => {
+    observer.observe(item);
+  });
+});
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize EmailJS with your public user ID
+      emailjs.init("7vJ5Nt-XXSnvf14oK");
+  
+      // Select the form element
+      const form = document.getElementById("contact-form");
+  
+      // Handle form submission
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent the form from reloading the page
+  
+        // Capture form input values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+  
+        // Validate input fields before sending the email
+        if (!name || !email || !message) {
+          alert("All fields are required. Please fill out the form completely.");
+          return;
+        }
+  
+        // Show a loading indicator (optional)
+        const submitButton = form.querySelector("button[type='submit']");
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+  
+        // Send email using EmailJS
+        emailjs
+          .send("service_7kmfkbg", "template_yy7z39g", {
+            to_name: "Yashwanth", // Your name as the recipient
+            from_name: name,      // User's name
+            from_email: email,    // User's email
+            message: message      // User's message
+          })
+          .then((response) => {
+            console.log("Email sent successfully:", response);
+            alert("Your message has been sent!"); // Show a success message
+            form.reset(); // Reset the form fields after successful submission
+          })
+          .catch((error) => {
+            console.error("Failed to send email:", error);
+            alert("Failed to send your message. Please try again later.");
+          })
+          .finally(() => {
+            // Reset the submit button state
+            submitButton.disabled = false;
+            submitButton.textContent = "Send Message";
+          });
+      });
+    });
+  
+    // Intersection Observer for scroll effects (optional)
+    const sections = document.querySelectorAll(".scroll-effect");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+  
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  
+    // Navbar link hover effect
+    const navbarLinks = document.querySelectorAll(".navbar a");
+    const indicator = document.querySelector(".indicator");
+  
+    function updateIndicator(link) {
+      const linkRect = link.getBoundingClientRect();
+      const navbarRect = document.querySelector(".navbar").getBoundingClientRect();
+      indicator.style.left = `${linkRect.left - navbarRect.left + (linkRect.width - indicator.offsetWidth) / 2}px`;
+    }
+  
+    navbarLinks.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        updateIndicator(link);
+      });
+    });
+  </script>
+  
+</body>
+</html>
