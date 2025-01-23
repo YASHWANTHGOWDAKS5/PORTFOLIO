@@ -628,6 +628,7 @@ emailjs.init({
 </script>
 
   <script>
+    require('dotenv').config();
     const circle = document.getElementById('circle');
 
 document.addEventListener('mousemove', function(event) {
@@ -662,7 +663,7 @@ document.addEventListener('mousemove', function(event) {
 
     document.addEventListener("DOMContentLoaded", () => {
       // Initialize EmailJS with your public user ID
-      emailjs.init("7vJ5Nt-XXSnvf14oK");
+      emailjs.init("process.env.EMAIL_JS");
   
       // Select the form element
       const form = document.getElementById("contact-form");
